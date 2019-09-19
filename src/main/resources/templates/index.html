@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	p.style1{
+		border:1px solid black;
+	}
+	
+	p.style2{
+		background-color: orange;
+	}
+</style>
+</head>
+<body>
+<p th:utext="${content}">基本的段落内容。</p>
+<span th:text="#{index.welcome(${session.userInfo.userName},test)}">span的原始内容</span>
+<br/>
+<div th:object="${prdInfo}">
+商品名称:[[*{productName}]]<br/>
+描述:<span th:text="*{desc}"></span><br/>
+价格:<span th:text="*{price}"></span><br/>
+类别:<span th:text="${prdInfo.typeId}?:_">无</span><br/>
+d参数的值：<span th:text="${param.d}"></span><br/>
+</div>
+
+<div>
+商品名称:[[*{prdInfo.productName}]]<br/>
+描述:<span th:text="*{prdInfo.desc}"></span><br/>
+价格:<span th:text="*{prdInfo.price}"></span><br/>
+类别:<span th:text="${prdInfo.typeId}?:'无'"></span><br/>
+d参数的值：<span th:text="${param.d}"></span><br/>
+</div>
+<hr/>
+<a href="/prd/list" th:href="@{/prd/list}">查看商品列表</a><br/>
+<a href="/test.html" th:href="@{/prd/detail/{prdId}(prdId=${prdInfo.productId})}">查看商品信息</a>
+contextPath:<span th:text="${#request.contextPath}"></span>
+
+<hr/>
+
+<p class="style1" th:text="'<div>div内容</div>'" th:class="${prdInfo.price>43}?'style2':'style1'"></p>
+<hr/>
+<a href="/test.html" th:attr="href=@{/prd/detail(prdId=${prdInfo.productId})},title='超链提示信息'" >查看商品信息</a><br/>
+
+<input type="text" name="userName" th:value="'张三'"/><br/>
+<input type="checkbox" name="hobby" th:checked="${prdInfo.typeId==2}"/>体育<br/>
+</body>
+</html>

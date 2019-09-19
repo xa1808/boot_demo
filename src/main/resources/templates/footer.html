@@ -1,0 +1,15 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- th:fragment="page_footer" -->
+	<div id="myfooter" th:fragment="page_footer(prdName,price)" style="height:120px;background-color: gray;">
+		&copy;西安粤嵌科技<br/>
+		地址：智慧国际<br/>
+		<span th:text="${prdName}+':'+${price}"></span>
+	</div>
+</body>
+</html>
